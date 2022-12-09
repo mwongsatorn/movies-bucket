@@ -4,21 +4,27 @@ defineProps({
     type: String,
     default: "Title",
   },
-  rating: {
+  vote_average: {
+    type: Number,
+    default: 0,
+  },
+  poster_path: {
     type: String,
-    default: "0",
+    default: null,
   },
 });
 </script>
 
 <template>
   <div
-    class="relative flex shrink-0 basis-[250px] flex-col overflow-hidden rounded-xl shadow-lg"
+    class="relative flex w-[250px] shrink-0 flex-col overflow-hidden rounded-xl shadow-lg"
   >
     <img
-      src="https://cdn.shopify.com/s/files/1/0057/3728/3618/products/108b520c55e3c9760f77a06110d6a73b_240x360_crop_center.progressive.jpg?v=1573652543"
+      v-if="poster_url !== null"
+      :src="`https://image.tmdb.org/t/p/w500/${poster_path}`"
       alt=""
     />
+    <img v-else src="https://placehold.co/250x375?text=No+Poster" alt="" />
     <div
       class="absolute bottom-0 right-0 h-[50%] w-full bg-gradient-to-b from-transparent to-black"
     ></div>
@@ -31,7 +37,7 @@ defineProps({
     <div
       class="absolute top-2 left-2 flex h-8 w-8 items-center justify-center rounded-full bg-red-700 font-bold text-white"
     >
-      {{ rating }}
+      {{ vote_average }}
     </div>
   </div>
 </template>
